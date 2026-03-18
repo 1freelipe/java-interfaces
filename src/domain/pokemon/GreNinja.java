@@ -9,4 +9,9 @@ public class GreNinja extends Pokemon{
     public void shuriken() {
         System.out.println("Greninja usou shuriken.");
     }
+
+    @Override
+    public void attack() {
+        shuriken();
+    }
 }

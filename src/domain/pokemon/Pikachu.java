@@ -6,6 +6,10 @@ public class Pikachu extends Pokemon implements ElectricType {
         super(nick, cp, hp);
     }
 
+    @Override
+    public void attack() {
+        thunderbolt();
+    }
 
    @Override
    public void thunderbolt() {
