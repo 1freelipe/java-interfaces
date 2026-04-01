@@ -23,7 +23,7 @@ public class App {
         novaDica.titulo = "Aprender JDBC";
         novaDica.descricao = "Estudar Prepared Statement";
 
-        // Instanciando a dica
+        // Instanciando a dica 2
         Dica novaDica2 = new Dica();
         novaDica2.id = 2;
         novaDica2.titulo = "Nova dica";
