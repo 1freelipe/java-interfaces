@@ -1,23 +1,31 @@
-package model.repositories.impl;
+package model.dao.impl;
 
+import java.beans.Statement;
+import java.sql.Connection;
 import java.util.List;
 
 import model.dao.DicasDao;
 import model.domain.Dica;
-import model.repositories.IDicasRepository;
 
-public class MySqlDicasRepository implements IDicasRepository{
+public class MySqlDAO implements DicasDao {
 
-    private DicasDao dicasDao;
+    private final Connection connection;
+    private static final logger logger = logger
 
-    public MySqlDicasRepository(DicasDao dicasDao) {
-        this.dicasDao = dicasDao;
+    public MySqlDAO(Connection connection) {
+        this.connection = connection;
     }
 
     @Override
     public Dica criar(Dica dica) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'criar'");
+        logger.info("Criando dica: " + dica);
+        try(Statement stm = connection.createStatement()) {
+            stm.execute("INSERT INTO dicas(titulo, descricao) VALUES ('%s', '%s')");
+        } catch(Exception e) {
+            logger.severe("Erro ao criar dica: " + e.getMessage());
+            return null;
+        }
+        return null;
     }
 
     @Override
@@ -43,9 +51,4 @@ public class MySqlDicasRepository implements IDicasRepository{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
     }
-    
-    
-
-
 }
-
