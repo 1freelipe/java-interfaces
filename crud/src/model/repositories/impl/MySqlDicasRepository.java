@@ -8,16 +8,15 @@ import model.repositories.IDicasRepository;
 
 public class MySqlDicasRepository implements IDicasRepository{
 
-    private DicasDao dicasDao;
+    private DicasDao dao;
 
-    public MySqlDicasRepository(DicasDao dicasDao) {
-        this.dicasDao = dicasDao;
+    public MySqlDicasRepository(DicasDao dao) {
+        this.dao = dao;
     }
 
     @Override
     public Dica criar(Dica dica) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'criar'");
+        return dao.criar(dica);
     }
 
     @Override

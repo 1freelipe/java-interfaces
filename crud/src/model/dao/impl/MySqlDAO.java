@@ -1,8 +1,9 @@
 package model.dao.impl;
 
-import java.beans.Statement;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Logger;
 
 import model.dao.DicasDao;
 import model.domain.Dica;
@@ -10,7 +11,7 @@ import model.domain.Dica;
 public class MySqlDAO implements DicasDao {
 
     private final Connection connection;
-    private static final logger logger = logger
+    private static final Logger logger = Logger.getLogger(MySqlDAO.class.getName());
 
     public MySqlDAO(Connection connection) {
         this.connection = connection;
@@ -19,8 +20,9 @@ public class MySqlDAO implements DicasDao {
     @Override
     public Dica criar(Dica dica) {
         logger.info("Criando dica: " + dica);
+        final String query = "INSERT INTO fatec.dicas (titulo, descricao) VALUES ('%s', '%s')";
         try(Statement stm = connection.createStatement()) {
-            stm.execute("INSERT INTO dicas(titulo, descricao) VALUES ('%s', '%s')");
+            stm.execute(String.format(query, dica.titulo, dica.descricao));
         } catch(Exception e) {
             logger.severe("Erro ao criar dica: " + e.getMessage());
             return null;
