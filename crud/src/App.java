@@ -34,7 +34,7 @@ public class App {
         novaDica2.descricao = "Nova descrição";
 
         // Instanciando o repository - Na memoria
-        IDicasRepository repository = new EmMemoriaRepository();
+        // IDicasRepository repository = new EmMemoriaRepository();
 
         // Criar repository
         Connection connection = ConexaoFactory.getConnection();
@@ -43,24 +43,25 @@ public class App {
 
         // Criar dica no repository2 que está sendo utilizado o MYSQL
         repository2.criar(novaDica);
+        repository2.criar(novaDica2);
 
         // Criando as dicas no repository - Na memoria
-        repository.criar(novaDica);
-        repository.criar(novaDica2);
+        // repository.criar(novaDica);
+        // repository.criar(novaDica2);
 
         // Buscar todas as dicas - Na memoria
-        List<Dica> dicas = repository.buscarTodos();
-        System.out.println(dicas);
+        // List<Dica> dicas = repository.buscarTodos();
+        // System.out.println(dicas);
 
         // Alterar dica sem passar o método?? - Na memoria
-        novaDica.descricao = "Dica alterada";
-        Dica dicaAlterada = repository.buscaPorId(1);
-        System.out.println(dicaAlterada);
+        // novaDica.descricao = "Dica alterada";
+        // Dica dicaAlterada = repository.buscaPorId(1);
+        // System.out.println(dicaAlterada);
 
         // Apagar dica - Na memoria
-        repository.apagar(2);
-        dicas = repository.buscarTodos();
-        System.out.println(dicas);
+        // repository.apagar(2);
+        // dicas = repository.buscarTodos();
+        // System.out.println(dicas);
 
 
     }
