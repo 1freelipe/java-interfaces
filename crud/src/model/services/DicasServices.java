@@ -24,10 +24,17 @@ public class DicasServices {
     }
 
     public Dica buscarPorId(Integer id) {
+        validarId(id);
         return repository.buscaPorId(id);
     }
 
     public Dica atualizar(Dica dica) {
+        validarDica(dica);
+        Dica dicaExistente = repository.buscaPorId(dica.id);
+
+        if(Objects.isNull(dicaExistente)) {
+            throw new IllegalArgumentException("Dica não encontrada.");
+        }
         return repository.atualizar(dica);
     }
 
@@ -49,5 +56,9 @@ public class DicasServices {
     }
 
     // Criando um outro validador para o ID
-    private validarId(Dica id)
+    private void validarId(Dica dica) {
+        if (Objects.isNull(dica.id)) {
+            throw new IllegalArgumentException("ID da dica não encontrado");
+        }
+    }
 }
