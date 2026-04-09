@@ -36,11 +36,11 @@ public class MySqlDAO implements DicasDao {
     public void apagar(Integer id) throws Exception {
         logger.info("Apagando dica com id: " + id);
         String query = "DELETE FROM fatec.dicas WHERE id = " + id;
-        try (Statement stm = connection.createStatement();
-    ) {
-            
+        try (Statement stm = connection.createStatement()) {
+            System.out.println("Dica apagada com sucesso.");
+            stm.execute(query);
         } catch (Exception e) {
-
+            logger.severe("Erro ao deletar dica" + e.getMessage());
         }
     }
 

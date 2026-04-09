@@ -1,13 +1,13 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.List;
+// import java.util.List;
 
 import model.dao.DicasDao;
 import model.dao.impl.MySqlDAO;
 import model.domain.Dica;
 import model.factories.ConexaoFactory;
 import model.repositories.IDicasRepository;
-import model.repositories.impl.EmMemoriaRepository;
+// import model.repositories.impl.EmMemoriaRepository;
 import model.repositories.impl.MySqlDicasRepository;
 
 public class App {
@@ -42,8 +42,9 @@ public class App {
         IDicasRepository repository2 = new MySqlDicasRepository(dao);
 
         // Criar dica no repository2 que está sendo utilizado o MYSQL
-        repository2.criar(novaDica);
+        // repository2.criar(novaDica);
         repository2.criar(novaDica2);
+        // repository2.apagar(1);
 
         // Criando as dicas no repository - Na memoria
         // repository.criar(novaDica);
