@@ -1,7 +1,9 @@
 package model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -31,15 +33,35 @@ public class MySqlDAO implements DicasDao {
     }
 
     @Override
-    public void apagar(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'apagar'");
+    public void apagar(Integer id) throws Exception {
+        logger.info("Apagando dica com id: " + id);
+        String query = "DELETE FROM fatec.dicas WHERE id = " + id;
+        try (Statement stm = connection.createStatement();
+    ) {
+            
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
     public List<Dica> buscarTodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarTodos'");
+        List<Dica> dicas = new ArrayList<>();
+        String query = "SELECT id, titulo, descricao FROM fatec.dicas";
+        try (Statement stm = connection.createStatement(); 
+            ResultSet rst = stm.executeQuery(query)) {
+        while (rst.next()) {
+            var dica = new Dica();
+            dica.id = rst.getInt("id");
+            dica.titulo = rst.getString("titulo");
+            dica.descricao = rst.getString("descricao");
+            dicas.add(new Dica());
+            }
+        }
+         catch (Exception e) {
+            logger.severe("Erro ao buscar todas as dicas." + e.getMessage());    
+        }
+        return dicas;
     }
 
     @Override
