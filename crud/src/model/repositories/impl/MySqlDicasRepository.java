@@ -39,9 +39,5 @@ public class MySqlDicasRepository implements IDicasRepository{
     public Dica atualizar(Dica dica) {
         return dao.atualizar(dica);
     }
-    
-    
-
-
 }
 
