@@ -2,13 +2,17 @@ package model.services;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import model.domain.Dica;
 import model.repositories.IDicasRepository;
 
 public class DicasServices {
-    private final IDicasRepository repository;
 
+    private static final Logger logger = Logger.getLogger(DicasServices.class.getName());
+    
+    private final IDicasRepository repository;
+    
     public DicasServices(IDicasRepository repository) {
         this.repository = repository;
     }
@@ -20,11 +24,15 @@ public class DicasServices {
 
     // Lançando exceção no método apagar
     public void excluir(Integer id) throws Exception{
-        repository.apagar(id);
+        validarId(id);
+        try {
+            repository.apagar(id);
+        } catch (Exception e) {
+            logger.severe("Erro ao excluir dica: " + e.getMessage());
+        }
     }
 
     public Dica buscarPorId(Integer id) {
-        validarId(id);
         return repository.buscaPorId(id);
     }
 
@@ -51,14 +59,17 @@ public class DicasServices {
             throw new IllegalArgumentException("O título não pode ser nulo ou vazio");
         }
         if(Objects.isNull(dica.descricao) || dica.descricao.isEmpty() || dica.descricao.length() > 500) {
-            throw new IllegalArgumentException("A descrição da dica não pode ser nula ou vazio");
+            throw new IllegalArgumentException("A descrição da dica não pode ser nula ou vazio.");
         }
     }
 
     // Criando um outro validador para o ID
-    private void validarId(Dica dica) {
-        if (Objects.isNull(dica.id)) {
+    private void validarId(Integer id) {
+        if (Objects.isNull(id)) {
             throw new IllegalArgumentException("ID da dica não encontrado");
+        }
+        if (id <=0 ) {
+            throw new IllegalArgumentException("O ID deve ser maior que zero");
         }
     }
 }
