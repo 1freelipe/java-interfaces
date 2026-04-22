@@ -1,5 +1,11 @@
 package view;
 
+import controller.DicasController;
+
 public class DicasView {
-    private final Dicas
+    private final DicasController controller;
+
+    public DicasView(DicasController controller) {
+        this.controller = controller;
+    }
 }
