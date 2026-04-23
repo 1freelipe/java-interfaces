@@ -2,16 +2,42 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 // import java.util.List;
 
+import controller.DicasController;
 import model.dao.DicasDao;
 import model.dao.impl.MySqlDAO;
 import model.domain.Dica;
 import model.factories.ConexaoFactory;
 import model.repositories.IDicasRepository;
+import model.repositories.impl.EmMemoriaRepository;
 // import model.repositories.impl.EmMemoriaRepository;
 import model.repositories.impl.MySqlDicasRepository;
+import model.services.DicasServices;
+import view.DicasView;
 
 public class App {
+
+    // Instanciando o controller
+    private static DicasController controller;
+
+    // Setup inicializador até a camada da View
+    private static void setUpInitializer() {
+        Connection conexao = ConexaoFactory.getConnection();
+        DicasDao dao = new MySqlDAO(conexao);
+        IDicasRepository repository = new EmMemoriaRepository();
+        DicasServices service = new DicasServices(repository);
+        controller = new DicasController(service);
+    }
+
     public static void main(String[] args) throws Exception {
+
+        // Instanciando a view passando o controller como parâmetro, última câmada do MVC
+        DicasView view = new DicasView(controller);
+        view.exibirMenu();
+
+
+
+
+
         System.out.println("Hello, World!");
         ResultSet rst = ConexaoFactory
                     .getConnection()

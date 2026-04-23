@@ -8,4 +8,9 @@ public class DicasView {
     public DicasView(DicasController controller) {
         this.controller = controller;
     }
+
+    public void exibirMenu() {
+        // 
+    }
+
 }
