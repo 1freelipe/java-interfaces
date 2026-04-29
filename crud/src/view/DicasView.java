@@ -13,7 +13,7 @@ public class DicasView {
         this.controller = controller;
     }
 
-    public void exibirMenu() {
+    public void exibirMenu() throws Exception {
         Integer opc;
         Scanner scanner = new Scanner(System.in);
         do {
@@ -44,7 +44,26 @@ public class DicasView {
 
                     create(title, description);
                     break;
+                case 3:
+                    // Limpando o buffer
+                    scanner.nextLine();
 
+                    System.out.println("Digite o ID da dica que você quer buscar: ");
+                    Integer id = scanner.nextInt();
+
+                    findDica(id);
+
+                    break;
+
+                case 4:
+                    // Limpandando o buffer
+                    scanner.nextLine();
+
+                    System.out.println("Digite o ID da dica que você quer deletar: ");
+                    Integer id1 = scanner.nextInt();
+
+                    delete(id1);
+                    break;
                 default:
                     break;
             }
@@ -68,11 +87,13 @@ public class DicasView {
     }   
 
     public List<Dica> index() {
+        // Criando a lista de todas as dicas do banco
         List<Dica> dicas = controller.buscarTodas();
 
         if(dicas.isEmpty()) {
             System.out.println("Nenhuma dica cadastrada.");
         } else {
+            // Percorrendo a lista e comparando a lista com a classe instanciada
             for (Dica dica : dicas) {
                 System.out.println("Título: " + dica.titulo);
                 System.out.println("Descrição: " + dica.descricao);
@@ -83,12 +104,29 @@ public class DicasView {
         return dicas;
     }
 
+    public void delete(Integer id) throws Exception {
+        controller.excluir(id);
+    }
+
+    public Dica findDica(Integer id) {
+        Dica dica = controller.buscarPorId(id);
+
+        if(dica == null) {
+            System.out.println("Dica não encontrada.");
+        } else {
+            System.out.println("Título: " + dica.titulo);
+            System.out.println("Descrição: " + dica.descricao);
+        }
+
+        return dica;
+    }
+
 }
 
 
 /* Criar a view com:
-    a - Menu de opções c/ operações do CRUD
-    b - Aplicar SRP e DIP
-    c - O menu deve ter opção de sair
+    a - Menu de opções c/ operações do CRUD - FEITO
+    b - Aplicar SRP e DIP - FEITO
+    c - O menu deve ter opção de sair - FEITO
     d - Criar funcionalidade de seleção de banco de dados por passagem de parâmetro na inicialização
 */

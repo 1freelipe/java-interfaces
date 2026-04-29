@@ -67,7 +67,7 @@ public class MySqlDAO implements DicasDao {
     @Override
     public Dica buscaPorId(Integer id) {
         Dica dica = null;
-        String query = "SELECT id, titulo, descricao FROM fatec.dicas";
+        String query = "SELECT id, titulo, descricao FROM fatec.dicas WHERE id = " + id;
         try (Statement stm = connection.createStatement(); 
                 ResultSet rst = stm.executeQuery(query)) {
                     if (rst.next()){
