@@ -55,7 +55,7 @@ public class MySqlDAO implements DicasDao {
             dica.id = rst.getInt("id");
             dica.titulo = rst.getString("titulo");
             dica.descricao = rst.getString("descricao");
-            dicas.add(new Dica());
+            dicas.add(dica);
             }
         }
          catch (Exception e) {

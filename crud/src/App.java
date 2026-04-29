@@ -35,42 +35,38 @@ public class App {
         DicasView view = new DicasView(controller);
         view.exibirMenu();
 
-
-
-
-
-        System.out.println("Hello, World!");
-        ResultSet rst = ConexaoFactory
-                    .getConnection()
-                    .createStatement()
-                    .executeQuery("Select Version() AS versao");
-        if (rst.next()) {
-            System.out.printf("Versão MYSQL: %s\n", rst.getString("versao"));
-        }
+        // System.out.println("Hello, World!");
+        // ResultSet rst = ConexaoFactory
+        //             .getConnection()
+        //             .createStatement()
+        //             .executeQuery("Select Version() AS versao");
+        // if (rst.next()) {
+        //     System.out.printf("Versão MYSQL: %s\n", rst.getString("versao"));
+        // }
 
         // Instanciando a dica
-        Dica novaDica = new Dica();
-        novaDica.id = 1;
-        novaDica.titulo = "Aprender JDBC";
-        novaDica.descricao = "Estudar Prepared Statement";
+        // Dica novaDica = new Dica();
+        // novaDica.id = 1;
+        // novaDica.titulo = "Aprender JDBC";
+        // novaDica.descricao = "Estudar Prepared Statement";
 
         // Instanciando a dica 2
-        Dica novaDica2 = new Dica();
-        novaDica2.id = 2;
-        novaDica2.titulo = "Nova dica";
-        novaDica2.descricao = "Nova descrição";
+        // Dica novaDica2 = new Dica();
+        // novaDica2.id = 2;
+        // novaDica2.titulo = "Nova dica";
+        // novaDica2.descricao = "Nova descrição";
 
         // Instanciando o repository - Na memoria
         // IDicasRepository repository = new EmMemoriaRepository();
 
         // Criar repository
-        Connection connection = ConexaoFactory.getConnection();
-        DicasDao dao = new MySqlDAO(connection);
-        IDicasRepository repository2 = new MySqlDicasRepository(dao);
+        // Connection connection = ConexaoFactory.getConnection();
+        // DicasDao dao = new MySqlDAO(connection);
+        // IDicasRepository repository2 = new MySqlDicasRepository(dao);
 
         // Criar dica no repository2 que está sendo utilizado o MYSQL
         // repository2.criar(novaDica);
-        repository2.criar(novaDica2);
+        // repository2.criar(novaDica2);
         // repository2.apagar(1);
 
         // Criando as dicas no repository - Na memoria
