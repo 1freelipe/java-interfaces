@@ -8,8 +8,6 @@ import model.dao.impl.MySqlDAO;
 import model.domain.Dica;
 import model.factories.ConexaoFactory;
 import model.repositories.IDicasRepository;
-import model.repositories.impl.EmMemoriaRepository;
-// import model.repositories.impl.EmMemoriaRepository;
 import model.repositories.impl.MySqlDicasRepository;
 import model.services.DicasServices;
 import view.DicasView;
@@ -23,12 +21,15 @@ public class App {
     private static void setUpInitializer() {
         Connection conexao = ConexaoFactory.getConnection();
         DicasDao dao = new MySqlDAO(conexao);
-        IDicasRepository repository = new EmMemoriaRepository();
+        IDicasRepository repository = new MySqlDicasRepository(dao);
         DicasServices service = new DicasServices(repository);
         controller = new DicasController(service);
     }
 
     public static void main(String[] args) throws Exception {
+
+        // Inicializando meu setup
+        setUpInitializer();
 
         // Instanciando a view passando o controller como parâmetro, última câmada do MVC
         DicasView view = new DicasView(controller);
